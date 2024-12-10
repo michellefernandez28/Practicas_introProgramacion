@@ -1,46 +1,47 @@
 #Crea un programa que registre la asistencia de un grupo de estudiantes.
 
 asistencia = [] 
+
 def registrar_asistencia (nombre , estado):
-    asistencia.append([nombre , estado])
+    asistencia.append((nombre , estado)) 
     
 def mostrar_asistencia (asistencia):
+    
+    presentes = (nombre for nombre, estado in asistencia if estado == "P")
+    ausente = (nombre for nombre, estado in asistencia if estado == "A")
+    
     print("\n*****Lista de asistencia:***** ")
+    
     print("\nEstudiantes presentes: ") 
-    
-    Presente = (nombre for nombre, estado in asistencia if estado == "P")
-    Ausente = (nombre for nombre, estado in asistencia if estado == "A")
-    
-    for estudiante in Presente:
-        print (estudiante)
+    for estudiante in presentes:
+        print (estudiante.title())
     
     print ("\nEstudiantes ausentes: ")
-    for estudiantes in Ausente:
-        print (estudiantes)
+    for estudiantes in ausente:
+        print (estudiantes.title())
     
-    
-    ##esto pasa sacar el porcentaje
-    lista_clase = len(asistencia)
-    if lista_clase > 0:
-        porcentaje = (len(Presente) / lista_clase) * 100
-        print (f"\nEl porccentaje de asistencia a clases es de: {porcentaje: .2f}%")
+#voy con el porcentaje
+        porcentaje = int((estado in "P") / asistencia) * 100 #no se como convertir para que todos los datos sean iguales
+        porcentaje
         
 
-
+##el while no lo tengo que tocar más, está funcionando
 
 while True:
-    nombre = input("Ingrese el nombre de la persona estudiante o escriba Salir para cerrar el programa:_____")
-    if nombre.lower() == "salir":  #le pongo el .lower porque si lo escriben diferente no se sale
-        break
-
-    estado = input("Escriba la letra P si la persona está presente, de lo contrario escriba la letra A:___").upper
+   
+    nombre = input("Escriba el nombre de la persona estudiante o bien 'Salir' para cerrar el programa: ")
+    if nombre.lower() == "salir":
+        break 
     
-    if estado in ("P" , "A"):
-        registrar_asistencia(nombre , estado)
+    estado = input("Ingrese 'P' para presente o 'A' para ausente: ").upper()
+    
+    if estado in ("P", "A"):
+        registrar_asistencia(nombre, estado)
     else:
-        print("Lo sentimos, solo se permite las letras P o A, intente de nuevo")
+        print("Lo sentimos, solo se permiten las letras 'P' o 'A'. Por favor vuelva a intentarlo")
             
-mostrar_asistencia(asistencia)
+mostrar_asistencia(asistencia) #esto no entiendo, me tira error, pero si lo quito no me muestra nada y si le escribo un print me da error tambien
+    
 
 
     
